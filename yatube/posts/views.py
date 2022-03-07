@@ -6,4 +6,7 @@ def index(request):
 
 
 def group_posts(request, slug):
-    return HttpResponse(f'{slug}')
+    context = {
+        'slug': slug,
+    }
+    return render(request, 'posts\group_list.html', context)
