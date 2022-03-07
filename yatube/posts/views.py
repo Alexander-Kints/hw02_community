@@ -1,8 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+
+from .models import Group, Post
 
 def index(request):
-    return render(request, 'posts\index.html')
+    posts = Post.objects.order_by('-pub_date')[:10]
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'posts\index.html', context)
 
 
 def group_posts(request, slug):
