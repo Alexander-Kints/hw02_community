@@ -6,10 +6,10 @@ User = get_user_model()
 
 class Group(models.Model):
     title = models.CharField(
-        max_length=255,
+        max_length=200,
         verbose_name='Имя'
     )
-    slug = models.SlugField(verbose_name='Адрес')
+    slug = models.SlugField(verbose_name='Адрес', unique=True)
     description = models.TextField(verbose_name='Описание')
 
     def __str__(self) -> str:
@@ -28,4 +28,10 @@ class Post(models.Model):
         related_name='post',
         verbose_name='Автор'
     )
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.CASCADE,
+        related_name = 'group_posts',
+        blank=True,
+        null=True
+    )
