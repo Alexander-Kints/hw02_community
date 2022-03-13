@@ -6,10 +6,8 @@
 
 {% block content %}
   <main> 
-    <!-- класс py-5 создает отступы сверху и снизу блока -->
     <div class="container py-5">     
       <h1>Последние обновления на сайте</h1>
-      <hr>
       {% for post in posts %}
         <article>
           <ul>
@@ -20,16 +18,15 @@
               Дата публикации: {{ post.pub_date|date:"d E Y" }}
             </li>
           </ul>      
-          <p>{{ post.text }}</p>
+          <p>{{ post.text|linebreaks }}</p>
           {% if post.group %}
             <a href="{% url 'posts:group_list' post.group.slug %}">
-              все записи группы
+              все записи группы "{{ post.group.title }}"
             </a>
           {% endif %}
         </article>
         {% if not forloop.lat %}<hr>{% endif %}
       {% endfor %}
-      <!-- под последним постом нет линии -->
     </div>  
   </main>
 {% endblock %}
