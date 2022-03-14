@@ -9,7 +9,7 @@
     <div class="container py-5">
       <h1>Последние обновления группы "{{ group.title }}".</h1>
       <p>
-        {{ group.description }}<br>
+        {{ group.description|linebreaks }}
       </p>
       {% for post in posts %}
         <article>
